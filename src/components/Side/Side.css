@@ -1,0 +1,52 @@
+.side {
+    padding-top: 150px;
+    width: 20%;
+    height: 100%;
+    background-color: var(--blue);
+    color: #99acc8;
+}
+
+.menu h4 {
+    margin-left: 1.5rem;
+}
+
+.menuItem {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+    gap: 1rem;
+    height: 2.5rem;
+    position: relative;
+    transition: 0.3s ease;
+    font-size: 1rem;
+    cursor: pointer;
+    padding-left: 1.5rem;
+}
+
+.active {
+    background-color: var(--activeItem);
+    padding-left: 2rem;
+    color: #FFF;
+}
+
+.logout {
+    margin-top: 50px;
+    color: #eb5f5f;
+}
+
+@media screen and (max-width: 1200px) {
+    .side {
+        position: fixed;
+        left: -50%;
+    }
+    .expanded {
+        background-color: var(--blue);
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 15rem;
+        left: 0;
+        z-index: 20;
+        color: #99acc8;
+    }
+}

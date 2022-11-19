@@ -1,0 +1,34 @@
+.right {
+    width: 30%;
+    padding-top: 80px;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.newUser {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .right {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .right {
+        padding: 0;
+        width: 90%;
+        margin: auto;
+    }
+}

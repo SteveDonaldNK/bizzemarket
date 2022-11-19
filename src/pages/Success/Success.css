@@ -1,0 +1,36 @@
+.Success {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F1F5F9;
+}
+
+.Success .container {
+    width: 40%;
+    min-height: 45vh;
+    padding: 30px 55px !important;
+    background: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 900px){
+    .Success .container {
+        width: 70%;
+    }
+    
+}
+
+@media screen and (max-width: 600px){
+    .Success .container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0 !important;
+        padding: 0 30px !important;
+    }
+    
+}

@@ -1,0 +1,80 @@
+.stat-container {
+    padding-left: 2rem;
+    width: 70%;
+    height: 100%;
+}
+ 
+.cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content .title {
+    font-size: 0.9rem !important;
+    color: #AAA;
+}
+
+.valueContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold !important;
+}
+
+.value {
+    font-size: 2rem !important;
+}
+
+.stats {
+    font-size: 1rem;
+    color: rgb(53, 240, 53)
+}
+
+@media screen and (max-width: 1200px) {
+    .stat-container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .stat-container {
+        padding: 0;
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cards .MuiCard-root{
+        text-align: center;
+        width: 55%;
+    }
+    .card-content {
+        padding: 10px !important;
+    }
+    .cards {
+        gap: 1rem;
+    }
+    .stats {
+        font-size: 0.8rem;
+        color: rgb(53, 240, 53)
+    }
+    .value {
+        font-size: 1.5rem !important;
+    }
+    .card-content .title {
+        font-size: 0.7rem !important;
+        color: #AAA;
+    }
+    .valueContainer {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        font-weight: bold !important;
+    }
+}

@@ -1,0 +1,73 @@
+.plan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 0 10%;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.methods {
+    height: 6rem;
+    width: 10rem;
+}
+
+.plans {
+    width: 90%;
+    margin: 5rem 0;
+}
+
+.payment {
+    width: 100%;
+    text-align: center;
+
+}
+
+.card {
+    width: 280px; 
+}
+
+.plan .title {
+    font-size: 4rem !important;
+    font-weight: 600 !important;
+}
+
+.checkoutIcon {
+    height: 5rem;
+    cursor: pointer;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    transition: 0.2s ease-in;
+}
+.checkoutIcon:hover {
+    -webkit-filter: grayscale(0);
+    filter: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .plans {
+        margin: 3rem 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .plan .title {
+        font-size: 3rem !important;
+        font-weight: 600 !important;
+    } 
+}
+
+@media screen and (max-width: 445px) {
+    .checkoutIcon {
+        height: 4rem;
+    }
+}
+@media screen and (max-width: 335px) {
+    .card {
+        width: 220px; 
+    }
+}

@@ -1,0 +1,85 @@
+:root {
+  --blue: #0D2555;
+  --orange: #fca61f;
+  --black: #242d49;
+  --gray: #788097;
+  --purple: linear-gradient(180deg, #BB67FF 0%, #C484F3 100%);
+  --pink: #FF919D;
+  --glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 5px 5px rgb(0 0 0 / 15%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #1f3b6f;
+}
+
+.Dash {
+    background: #F1F5F9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main{
+  width: 80%;
+  height: 100%;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  overflow-y: scroll;
+}
+
+.navbar {
+  height: 8vh;
+  background-color: #FFF;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 2rem;
+  box-shadow: var(--boxShadow);
+}
+
+.user {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+    width: 100%;
+  }
+  .Dash {
+    height: auto;
+  }
+  .navbar {
+    justify-content: space-between;
+  }
+  .hidden {
+    display: block !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .Dash {
+    height: auto;
+    padding-bottom: 50px;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+  
+}
