@@ -59,7 +59,7 @@ export default function Profile() {
 
   function fetchUser() {
     try {
-       axios.get("http://localhost:4000/userdata",{withCredentials: true}) 
+       axios.get("/api/userdata",{withCredentials: true}) 
        .then((res) => {
         setUserData(res.data);
         setUserProducts(res.data.posts);
@@ -80,7 +80,7 @@ export default function Profile() {
 
   const handleSoldOut = () => {
     try {
-      axios.get("http://localhost:4000/soldOut", {withCredentials: true})
+      axios.get("/api/soldOut", {withCredentials: true})
       .then(res => {
         setUserProducts(res.data)
         setLoading(false);
@@ -92,7 +92,7 @@ export default function Profile() {
 
   const handlePending = () => {
     try {
-      axios.get("http://localhost:4000/pending", {withCredentials: true})
+      axios.get("/api/pending", {withCredentials: true})
       .then(res => {
         setUserProducts(res.data)
         setLoading(false);
@@ -104,7 +104,7 @@ export default function Profile() {
 
   const handleRefused = () => {
     try {
-      axios.get("http://localhost:4000/denied", {withCredentials: true})
+      axios.get("/api/denied", {withCredentials: true})
       .then(res => {
         setUserProducts(res.data)
         setLoading(false);

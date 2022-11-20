@@ -28,7 +28,7 @@ export default function Dash() {
 
     function fetchUser() {
       try {
-         axios.get("http://localhost:4000/userdata",{withCredentials: true}) 
+         axios.get("/api/userdata",{withCredentials: true}) 
          .then((res) => {
           setUser(res.data);   
          })

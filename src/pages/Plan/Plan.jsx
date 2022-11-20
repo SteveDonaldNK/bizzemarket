@@ -49,7 +49,7 @@ const handleCheckout = (price) => {
     }
 
     try {
-        axios.post("http://localhost:4000/checkout",data, {
+        axios.post("/api/checkout",data, {
             Headers: {
                 "Content-Type":"application/json"
             },

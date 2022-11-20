@@ -27,7 +27,7 @@ export default function Product({fav, product}) {
     
     function getFav () {
             try {
-                axios.get('http://localhost:4000/favorite', {withCredentials: true})
+                axios.get('/api/favorite', {withCredentials: true})
                 .then(res => setFavorites(res.data))
             } catch (error) {
                 console.log(error)
@@ -59,7 +59,7 @@ export default function Product({fav, product}) {
 
     function addToFav () {
         try {
-            axios.patch("http://localhost:4000/user/fav", {favorite: product._id}, {
+            axios.patch("/api/user/fav", {favorite: product._id}, {
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -79,7 +79,7 @@ export default function Product({fav, product}) {
 
     function deletePost () {
         try {
-            axios.delete(`http://localhost:4000/delete/${product._id}`,{
+            axios.delete(`/api/delete/${product._id}`,{
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -127,7 +127,7 @@ export default function Product({fav, product}) {
                     <CardMedia
                         component="img"
                         height="250"
-                        image= {`http://localhost:4000/images/${product.img[0]}`}
+                        image= {`/api/images/${product.img[0]}`}
                         alt={product.title}
                     />
                 <CardContent sx={{height: "145px"}} >

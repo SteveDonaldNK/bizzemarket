@@ -23,7 +23,7 @@ export default function Products({subProducts, title, theme}) {
     
     const fetchProducts = (filter) => {
       try {
-        axios.post("http://localhost:4000/sort", {filterValue: filter}, {
+        axios.post("/api/sort", {filterValue: filter}, {
             headers: {
                 'Content-Type':'application/json'
             }

@@ -46,7 +46,7 @@ export default function EditPost() {
             //     setSelectedImage1('');
             //     setSelectedImage2('');
             //     setSelectedImage3('');
-            //     axios.put("http://localhost:4000/products", formData , {
+            //     axios.put("/api/products", formData , {
             //         headers: {
             //           'Content-Type': 'multipart/form-data'
             //         },
@@ -110,7 +110,7 @@ export default function EditPost() {
 
   async function fetchData() {
     try {
-        await axios.get(`http://localhost:4000/productData/${productId}`, { withCredentials: true })
+        await axios.get(`/api/productData/${productId}`, { withCredentials: true })
         .then(res => {
             const imgArr = [setSelectedImage1, setSelectedImage2, setSelectedImage3]
             setData(res.data);

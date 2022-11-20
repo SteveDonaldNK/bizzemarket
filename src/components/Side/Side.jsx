@@ -31,7 +31,7 @@ export default function Side({expanded, setTab}) {
     
     const handleLogout = () => {
       localStorage.clear();
-      axios.get("http://localhost:4000/logout", {withCredentials: true})
+      axios.get("/api/logout", {withCredentials: true})
       .then(res => {
         if (res.status === 200) {
           window.location.href = '/';

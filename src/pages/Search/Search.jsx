@@ -16,7 +16,7 @@ export default function Search() {
 
   const fetchProducts = async () => {
     try {
-      axios.get(`http://localhost:4000/search${search}`)
+      axios.get(`/api/search${search}`)
       .then((res) => {
         setProducts(res.data)
       })

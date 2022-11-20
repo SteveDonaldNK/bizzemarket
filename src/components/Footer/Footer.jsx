@@ -17,7 +17,7 @@ export default function Footer({theme}) {
       const obj = Object.fromEntries([...formData])
       
       try {
-        axios.post("http://localhost:4000/subscribe", obj, {
+        axios.post("/api/subscribe", obj, {
           Headers: {
             "Content-Type":"application/json"
           }

@@ -31,7 +31,7 @@ export default function Login() {
         const payload = [...formData];
         const data = {email: payload[0][1], password: payload[1][1]}
         try {
-          axios.post("http://localhost:4000/login", data, {
+          axios.post("/api/login", data, {
             headers:{
               'Content-Type':'application/json'
           },

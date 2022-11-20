@@ -8,7 +8,7 @@ export default function Context(props) {
   const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/loggedIn", {withCredentials: true})
+    axios.get("/api/loggedIn", {withCredentials: true})
     .then(res => {
       setUser(res.data.connected)
       setAdmin(res.data.isAdmin)
