@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.44511a67.css",
+    "main.js": "/static/js/main.a314495f.js",
+    "static/media/create.png": "/static/media/create.e29a9129130028888cdd.png",
+    "static/media/empty.gif": "/static/media/empty.fee33762d51ff25f3100.gif",
+    "static/media/cart.png": "/static/media/cart.46815b3b7ef6ed5b0b43.png",
+    "static/media/storeBanner.jpg": "/static/media/storeBanner.3fe0924bd7d6c1218c15.jpg",
+    "static/media/notfound.gif": "/static/media/notfound.bd2829cf10ac7a9968de.gif",
+    "static/media/OMlogo.jpg": "/static/media/OMlogo.0bffbd852b4b4dac7e39.jpg",
+    "static/media/publish.png": "/static/media/publish.dba24dc0926afb17dcfc.png",
+    "static/media/logo-main.png": "/static/media/logo-main.a4b10156cdfcfd60b1b2.png",
+    "static/media/relax.png": "/static/media/relax.757176cffc59b48b2456.png",
+    "static/media/master.png": "/static/media/master.262ad69481e810b73f39.png",
+    "static/media/visa.jpg": "/static/media/visa.d062bf0ae254f85c510b.jpg",
+    "static/media/american.png": "/static/media/american.338cd681a6afc75592a3.png",
+    "static/media/google.png": "/static/media/google.4e4e29450907975f4c9f.png",
+    "static/media/facebook.png": "/static/media/facebook.01a470d813915c298403.png",
+    "static/media/creditcard.png": "/static/media/creditcard.910d38365e5763c2f0fd.png",
+    "static/media/MOMO.png": "/static/media/MOMO.5bb5f0a3188c493fe739.png",
+    "index.html": "/index.html",
+    "main.44511a67.css.map": "/static/css/main.44511a67.css.map",
+    "main.a314495f.js.map": "/static/js/main.a314495f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44511a67.css",
+    "static/js/main.a314495f.js"
+  ]
+}
