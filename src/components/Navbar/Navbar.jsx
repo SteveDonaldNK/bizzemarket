@@ -34,7 +34,7 @@ export default function Navbar({theme}) {
     const location = ReactRouter.useLocation().pathname;
     const navigate = ReactRouter.useNavigate();
     const classes = useStyles();
-    const isMatch = useMediaQuery(theme.breakpoints.down(1250));
+    const isMatch = useMediaQuery(theme.breakpoints.down(1280));
     const foldDevice = useMediaQuery(theme.breakpoints.down(304));
     let btnLabel = "Poster une annonce";
     let altBtnLabel = "Voir les annonces";
@@ -58,7 +58,7 @@ export default function Navbar({theme}) {
 
     function fetchUser() {
       try {
-         axios.get("/api/userdata",{withCredentials: true}) 
+         axios.get("http://localhost:4000/api/userdata",{withCredentials: true}) 
          .then((res) => {
           setUser(res.data);   
          })
@@ -123,7 +123,7 @@ export default function Navbar({theme}) {
 
     const handleLogout = () => {
       localStorage.clear();
-      axios.get("/api/logout", {withCredentials: true})
+      axios.get("http://localhost:4000/api/logout", {withCredentials: true})
       .then(res => {
         if (res.status === 200) {
           window.location.href = location;
@@ -139,8 +139,8 @@ export default function Navbar({theme}) {
             <div className={classes.linkContainer}>
               <Link className={classes.links} href='/'><Typography variant="h6">Accueil</Typography></Link>
               <Link className={classes.links} href='/offres'><Typography variant="h6">Premium</Typography></Link>
-              <Link className={classes.links} href='/about'><Typography variant="h6">Apropos</Typography></Link>
-              <Link className={classes.links} href='/contact'><Typography variant="h6">Contactez nous</Typography></Link>
+              <Link className={classes.links} href='/about'><Typography variant="h6">À propos</Typography></Link>
+              <Link className={classes.links} href='/contact'><Typography variant="h6">Contactez-nous</Typography></Link>
             </div> :
           <form onSubmit={handleSubmit} >
             <TextField

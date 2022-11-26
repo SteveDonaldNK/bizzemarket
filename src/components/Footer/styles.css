@@ -1,0 +1,23 @@
+.grid-container .footer-link {
+    color: #FFF;
+    width: fit-content;
+    margin: 3px 0;
+    display: block;
+}
+
+.grid-container .footer-socialLogo {
+    height: 2.5rem;
+}
+
+.grid-container .footer-links{
+}
+
+@media (max-width: 1200px) {
+    .grid-container {
+        text-align: center;
+    }
+
+    .grid-container .footer-link {
+        margin: 3px auto;
+    }
+}

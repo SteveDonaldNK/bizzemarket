@@ -3,6 +3,8 @@ import axios from 'axios';
 import React from 'react'
 import logo from "../../assets/logo.png"
 import useStyles from "./styles"
+import FBlogo from "../../assets/fb.png"
+import './styles.css'
 
 export default function Footer({theme}) {
     const classes = useStyles();
@@ -17,7 +19,7 @@ export default function Footer({theme}) {
       const obj = Object.fromEntries([...formData])
       
       try {
-        axios.post("/api/subscribe", obj, {
+        axios.post("http://localhost:4000/api/subscribe", obj, {
           Headers: {
             "Content-Type":"application/json"
           }
@@ -30,20 +32,23 @@ export default function Footer({theme}) {
 
   return (
     <div className={classes.Container}>
-      <Grid sx={styling} container spacing={5} justifyContent="space-between" >
+      <Grid className="grid-container" sx={styling} container spacing={5} justifyContent="space-between" >
         <Grid sx={styling} container item lg={12} spacing={5} >
-          <Grid item lg={4}>
+          <Grid item md={4} lg={3}>
             <img style={{width: "100px", marginBottom: "10px"}} src={logo} alt="logo" />
             <Typography>Le boss des annonces en ligne</Typography>
           </Grid>
-          <Grid item lg={4}>
-            <Typography sx={{fontWeight: "700"}} variant='h6'>INFORMATIONS</Typography>
-            <Link underline="none" color="ivory" href='#'><Typography variant='body2'>A propos de nous</Typography></Link>
-            <Link underline="none" color="ivory" href='#'><Typography variant='body2'>Consentement - Cookies</Typography></Link>
-            <Link underline="none" color="ivory" href='#'><Typography variant='body2'> Confidentialité</Typography></Link>
-            <Link underline="none" color="ivory" href='#'><Typography variant='body2'>Nous contacter</Typography></Link>
+          <Grid item md={4} lg={3}>
+            <Typography className="footer-links" sx={{fontWeight: "700"}} variant='h6'>INFORMATIONS</Typography>
+            <Link className="footer-link" underline="none" href='/about'>À propos de nous</Link>
+            <Link className="footer-link" underline="none" href='#'>Confidentialité</Link>
+            <Link className="footer-link" underline="none" href='/contact'>Nous contacter</Link>
           </Grid>
-          <Grid item lg={4}>
+          <Grid item md={4} lg={3}>
+            <Typography variant='h6' style={{fontWeight: "700"}}>SUIVEZ-NOUS</Typography>
+            <Link className="footer-link" underline="none" color="ivory" href='#'><img className='footer-socialLogo' src={FBlogo} alt="" /></Link>
+          </Grid>
+          <Grid item md={12} lg={3}>
             <form onSubmit={handleSubmit}>
               <Typography sx={{fontWeight: "700"}} variant='h6'>NEWSLETTER</Typography>
               <Typography variant='body2'>Restez informer des actualités et des meilleures annonces en Afrique en vous inscrivant à la newsletter !</Typography>

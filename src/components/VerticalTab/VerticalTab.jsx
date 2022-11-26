@@ -7,10 +7,11 @@ import axios from 'axios';
 import { green } from '@mui/material/colors';
 import { towns } from '../../categories';
 import _ from 'lodash';
+import './styles.css'
 
 const logOut = () => {
   localStorage.clear();
-  axios.get("/api/logout", {withCredentials: true})
+  axios.get("http://localhost:4000/api/logout", {withCredentials: true})
   .then(res => {
     if (res.status === 200) {
       window.location.href = "/";
@@ -60,6 +61,7 @@ export default function VerticalTab({userData}) {
     const [error, setError] = useState(false);
     const [message, setMessage] = useState('');
     const [picture, setPicture] = useState({});
+    const [profilePictue, setProfilePicture] = useState(userData.avatarImg);
     
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -100,7 +102,7 @@ export default function VerticalTab({userData}) {
     formData.append("avatar", picture);
     console.log([...formData]);
     try {
-      axios.put("/api/updateuser", formData, {
+      axios.put("http://localhost:4000/api/updateuser", formData, {
       headers: {
         'Content-Type':'multipart/form-data'
       }, 
@@ -132,7 +134,7 @@ export default function VerticalTab({userData}) {
   }
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    newValue !== 2 && setValue(newValue);
   };
 
   const handleSubmit = (e) => {
@@ -147,7 +149,7 @@ export default function VerticalTab({userData}) {
     } else {
       const {confirm, ...credentials} = obj;
       try {
-        axios.patch("/api/resetpassword", credentials, {
+        axios.patch("http://localhost:4000/api/resetpassword", credentials, {
           headers: {
             "Content-Type":"application/json"
           },
@@ -177,7 +179,7 @@ export default function VerticalTab({userData}) {
         >
             <Tab label="Mon compte" {...a11yProps(0)} />
             <Tab label="Mot de passe" {...a11yProps(1)} />
-            <Button onClick={logOut} color='error' >Deconnecter</Button>
+            <Tab onClick={() => logOut()} className="logout-tab" label="Déconnection" />
     </Tabs>
     </>
   )
@@ -202,7 +204,7 @@ export default function VerticalTab({userData}) {
                           <IconButton onClick={handleClick} sx={{background: "#FFF", border: "1px solid #AAA", '&:hover': {background: "#FFF"}}}><Edit sx={{fontSize: "1rem !important"}} /></IconButton>
                       }
                       >
-                      <Avatar src={`/api/${userData.avatarImg}`} sx={{height: 80, width: 80}} />
+                      <Avatar src={ profilePictue !== undefined && `http://localhost:4000/api/${profilePictue}`} sx={{height: 80, width: 80}} />
                       </Badge>
                       <input
                           style={{display: 'none'}}

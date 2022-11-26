@@ -51,7 +51,7 @@ export default function SubProduct() {
 
     const fetchProducts = () => {
         try {
-            axios.get(`/api/subProducts/${subCategory}`)
+            axios.get(`http://localhost:4000/api/subProducts/${subCategory}`)
             .then((res) => setProducts(res.data))
         } catch (error) {
             console.log(error);

@@ -1,17 +1,11 @@
 import { Box, Pagination } from '@mui/material'
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React from 'react'
 
-export default function PagePagination({count, handlePageChange}) {
-    // const [pagination, setPagination] = useState({
-    //     count: 0,
-    //     from: 0,
-    //     to: pageSize
-    // })
+export default function PagePagination({count, handlePageChange, currentPage}) {
 
   return (
     <Box justifyContent="center" alignItems="center" display="flex" sx={{margin: "20px 0px"}}>
-        <Pagination count={count} onChange={handlePageChange}/>
+        <Pagination defaultPage={currentPage} count={count} onChange={handlePageChange}/>
     </Box>
   )
 }

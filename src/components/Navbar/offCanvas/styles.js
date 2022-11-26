@@ -7,5 +7,8 @@ export default makeStyles((theme) => ({
         height: "40px",
         borderRadius: "30px !important",
         padding: "0 !important"
+    },
+    links: {
+        marginBottom: "20px !important",
     }
 }));

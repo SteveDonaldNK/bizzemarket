@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Drawer, IconButton, InputAdornment, Link, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Drawer, IconButton, InputAdornment, Link, Stack, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Menu, Close, Search } from "@mui/icons-material";
 import LoginDialog from '../LoginDialog/LoginDialog';
 import facebookIcon from "../../../assets/facebook.png"
@@ -58,44 +58,47 @@ export default function Offcanvas() {
     
     return (
     <div>
-        <Drawer PaperProps={{sx: {width: "50%", padding: "10%", display: "flex", flexDirection: "column", gap: "25px", position: "relative"}}} open={DrawerValue} onClose={() => setDrawerValue(false)}> 
-            <IconButton id='close' onClick={() => setDrawerValue(!DrawerValue)} sx={{width: "min-content", position: "absolute", top: "1%", right: "5%"}}><Close /></IconButton>
-            {
-              location.pathname !== '/' 
-              && 
-              <form onSubmit={handleSubmit} >
-                <TextField
-                  size='small'
-                  name='keyword'
-                  onChange={(e) => setSearch(e.target.value)}
-                  InputProps={{
-                    className: classes.searchBar,
-                    placeholder: "Chercher...",
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton type='submit'>
-                          <Search />
-                        </IconButton>
-                      </InputAdornment>
-                    )
-                  }}
-                />
-              </form>
-            }
-            <Link underline="none" href='/'><Typography variant='h6'>Accueil</Typography></Link>
-            <Link underline="none" className={classes.links} href='/annonces'><Typography variant="h6">Annonces</Typography></Link>
-            {ctx.connected ? <Link underline="none" href='/account'><Typography variant='h6'>Mon compte</Typography></Link>:
-            <Link sx={{cursor: "pointer"}} underline="none" onClick={handleClickOpen}><Typography variant='h6'>Connexion</Typography></Link>}
-            {ctx.connected && <Link underline="none" href='/dashboard'><Typography variant='h6'>Mon profil</Typography></Link>}
-            {foldDevice && <Link sx={{cursor: "pointer"}} underline="none" onClick={handlePostClickOpen}><Typography variant='h6'>Poster une annonce</Typography></Link>}
-            <Link underline="none" href='/offres'><Typography variant='h6'>Premium</Typography></Link>
-            <Link underline="none" href='/contact'><Typography variant='h6'>Nous Contacter</Typography></Link>
-            <LoginDialog
-              LoginMethod = {LoginMethod}
-              selectedValue={selectedValue}
-              open={open}
-              onClose={handleClose}
-            />
+        <Drawer PaperProps={{sx: {width: "55%", padding: "10%"}}} open={DrawerValue} onClose={() => setDrawerValue(false)}> 
+            <Stack direction="column" >
+              <IconButton id='close' onClick={() => setDrawerValue(!DrawerValue)} sx={{width: "min-content", position: "absolute", top: "1%", right: "5%"}}><Close /></IconButton>
+              {
+                location.pathname !== '/' 
+                && 
+                <form onSubmit={handleSubmit} >
+                  <TextField
+                    size='small'
+                    name='keyword'
+                    onChange={(e) => setSearch(e.target.value)}
+                    InputProps={{
+                      className: classes.searchBar,
+                      placeholder: "Chercher...",
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton type='submit'>
+                            <Search />
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                </form>
+              }
+              <Link underline="none" className={classes.links} href='/'><Typography variant='h6'>Accueil</Typography></Link>
+              <Link underline="none" className={classes.links} href='/annonces'><Typography variant="h6">Annonces</Typography></Link>
+              {ctx.connected ? <Link underline="none" className={classes.links} href='/account'><Typography variant='h6'>Mon compte</Typography></Link>:
+              <Link sx={{cursor: "pointer"}} className={classes.links} underline="none" onClick={handleClickOpen}><Typography variant='h6'>Connexion</Typography></Link>}
+              {ctx.isAdmin && <Link className={classes.links} underline="none" href='/admin'><Typography variant='h6'>Admin</Typography></Link>}
+              {ctx.connected && <Link className={classes.links} underline="none" href='/dashboard'><Typography variant='h6'>Mon profil</Typography></Link>}
+              {foldDevice && <Link className={classes.links} sx={{cursor: "pointer"}} underline="none" onClick={handlePostClickOpen}><Typography variant='h6'>Poster une annonce</Typography></Link>}
+              <Link className={classes.links} underline="none" href='/offres'><Typography variant='h6'>Premium</Typography></Link>
+              <Link className={classes.links} underline="none" href='/contact'><Typography variant='h6'>Nous Contacter</Typography></Link>
+              <LoginDialog
+                LoginMethod = {LoginMethod}
+                selectedValue={selectedValue}
+                open={open}
+                onClose={handleClose}
+              />
+            </Stack>
         </Drawer>
         <IconButton id="open" onClick={() => setDrawerValue(!DrawerValue)}>
             <Menu/>

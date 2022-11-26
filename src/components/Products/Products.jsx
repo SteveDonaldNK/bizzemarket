@@ -6,16 +6,17 @@ import useStyles from "./styles"
 import Filters from './Filters/Filters'
 import axios from 'axios'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import PagePagination from '../PagePagination/PagePagination'
 import { Box } from '@mui/system'
 
 export default function Products({subProducts, title, theme}) {
     const classes = useStyles();
+    const pageNumber = useSearchParams()
     const location = useLocation().pathname;
     const [products, setProducts] = useState([]);
     const [selected, setSelected] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(Number(pageNumber[0].get("p")));
     const [filterPrice, setFilterPrice] = useState([]);
     const [filterValue, setFilterValue] = useState('recent');
     const [selectedLocation, setSelectedLocation] = useState('');
@@ -23,7 +24,7 @@ export default function Products({subProducts, title, theme}) {
     
     const fetchProducts = (filter) => {
       try {
-        axios.post("/api/sort", {filterValue: filter}, {
+        axios.post("http://localhost:4000/api/sort", {filterValue: filter}, {
             headers: {
                 'Content-Type':'application/json'
             }
@@ -45,8 +46,6 @@ export default function Products({subProducts, title, theme}) {
           console.log(error);
       }
     }
-
-
         useEffect(() => {
             if (location === '/annonces') {
                 fetchProducts(filterValue);
@@ -78,8 +77,11 @@ export default function Products({subProducts, title, theme}) {
                 setProducts(newProducts)
            }
         }, [filterPrice])
-        
-    const productPerPage = 12;
+
+    const productPerPage = 4;
+    if (currentPage === null || currentPage === undefined) {
+        setCurrentPage(1);
+    }
     const lastProductIndex = currentPage * productPerPage;
     const firstProductIndex = lastProductIndex - productPerPage;
     const count = Math.ceil(products.length/productPerPage);
@@ -107,7 +109,7 @@ export default function Products({subProducts, title, theme}) {
     };
 
     const handlePageChange = (event, page) => {
-        setCurrentPage(page);
+       window.location.href = `/annonces?p=${page}`;
     }
 
     function onFilterValueSelected(filterValue) {
@@ -158,7 +160,7 @@ export default function Products({subProducts, title, theme}) {
     >
         <Filters setFilterValue={setFilterValue} handleDelete={handleDelete} setFilterPrice={setFilterPrice} setSelectedLocation={setSelectedLocation} onFilterValueSelected={onFilterValueSelected} filterValue={filterValue} handleClose={handleClose} bp={isMatch} />
     </Popover>
-    <PagePagination handlePageChange={handlePageChange} count={count} /></>
+    <PagePagination handlePageChange={handlePageChange} count={count} currentPage={currentPage} /></>
         }
     </div>
   )

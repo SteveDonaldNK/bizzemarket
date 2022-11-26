@@ -20,11 +20,11 @@ export default function Post() {
     const [selectedImage1, setSelectedImage1] = useState('');
     const [selectedImage2, setSelectedImage2] = useState('');
     const [selectedImage3, setSelectedImage3] = useState('');
+    const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [subCategory, setSubCategory] = useState('');
     const [selectedSubCategory, setSelectedSubCategory] = useState([]);
     const [town, setTown] = useState('');
-    const [letterLimit, setLetterLimit] = useState(0);
     const [open, setOpen] = React.useState(false);
 
     const handleClose = () => {
@@ -43,7 +43,7 @@ export default function Post() {
                 setSelectedImage1('');
                 setSelectedImage2('');
                 setSelectedImage3('');
-                axios.post("/api/products", formData , {
+                axios.post("http://localhost:4000/api/products", formData , {
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     },
@@ -78,8 +78,8 @@ export default function Post() {
         setter([]);
     }
 
-    const handleLetterLimit = (event) => {
-        setLetterLimit(event.target.value.length);
+    const handleDescription = (value) => {
+        setDescription(value);
     }
 
   const handleCategoryChange = (event) => {
@@ -159,14 +159,15 @@ export default function Post() {
                         <TextField name='title' size='small' fullWidth id="outlined-basic" placeholder="Titre" variant="outlined" required/>
                         <Typography sx={{fontWeight: "Bold !important", mt: 3}} variant='subtitle1'>Description</Typography>
                         <TextareaAutosize
-                        onChange={handleLetterLimit}
+                        value={description}
+                        onChange={(e) => handleDescription(e.target.value)}
                         name='description'
                         maxRows={4}
                         aria-label="maximum height"
                         style={{ width: "100%", height: "150px", borderRadius: "5px", }}
                         maxLength={3000}
                         required
-                        /> <span style={{float: "right"}}><Typography variant='body2' >{letterLimit}/3000</Typography></span>
+                        /> <span style={{float: "right"}}><Typography variant='body2' >{description.length}/3000</Typography></span>
                         <Typography sx={{fontWeight: "Bold !important", mt: 4}} variant='subtitle1'>Prix (FCFA)</Typography>
                         <TextField size='small' id="outlined-basic" type="number" placeholder='Donner un Prix' variant="outlined" name='price' /><br />
                         <Typography sx={{fontWeight: "Bold !important", mt: 4}} variant='subtitle1'>Categorie</Typography>
@@ -228,24 +229,26 @@ export default function Post() {
                             required
                             name='phoneNumber'
                             sx={{mt: 2, minWidth: 222}} 
-                            type="tel" size='small' id="outlined-basic" 
+                            type="number" size='small' id="outlined-basic" 
                             placeholder="Telephone" variant="outlined" 
                             InputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <Smartphone color='primary' />
+                                    <Typography sx={{fontWeight: "bold", marginLeft: "5px"}} variant="subtitle1"> +237</Typography>
                                   </InputAdornment>
                                 )
                               }}/> <br />
                         <TextField 
                         sx={{mt: 2, minWidth: 222}} 
                         name='whatsappNumber'
-                        type="tel" size='small' id="outlined-basic" 
+                        type="number" size='small' id="outlined-basic" 
                         placeholder="Whatsapp" variant="outlined" 
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
                                 <WhatsApp color='success' />
+                                <Typography sx={{fontWeight: "bold", marginLeft: "5px"}} variant="subtitle1"> +237</Typography>
                               </InputAdornment>
                             )
                           }}

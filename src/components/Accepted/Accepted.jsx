@@ -10,7 +10,7 @@ const [posts, setPosts] = useState([])
 
 function fetchAcceptedPosts () {
     try {
-       axios.get("/api/admin/accepted", {withCredentials: true})
+       axios.get("http://localhost:4000/api/admin/accepted", {withCredentials: true})
        .then(res => setPosts(res.data))
     } catch (error) {
         console.log(error)

@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { context } from '../../../pages/Context';
 import axios from 'axios';
 
-export default function Product({fav, product}) {
+export default function Product({product}) {
     const classes = useStyles();
     const ctx = useContext(context);
     const location = useLocation().pathname;
@@ -22,24 +22,29 @@ export default function Product({fav, product}) {
     const starts = moment(product.createdAt);
     const ends = moment();
     const current = moment.duration(ends.diff(starts))._data
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState();
     const [iconColor, setIconColor] = useState({});
-    
-    function getFav () {
-            try {
-                axios.get('/api/favorite', {withCredentials: true})
-                .then(res => setFavorites(res.data))
-            } catch (error) {
-                console.log(error)
-            }
+
+    function getFav() {
+        try {
+            axios.get('http://localhost:4000/api/favorite', {withCredentials: true})
+            .then(res => setFavorites(res.data))
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
         if (ctx.connected) {
             getFav();
         }
-        checkFav()
     }, [])
+
+    useEffect(() => {
+        if (ctx.connected) {
+            checkFav();
+        }
+    }, [favorites])
 
     function getDuration() {
         
@@ -59,7 +64,7 @@ export default function Product({fav, product}) {
 
     function addToFav () {
         try {
-            axios.patch("/api/user/fav", {favorite: product._id}, {
+            axios.patch("http://localhost:4000/api/user/fav", {favorite: product._id}, {
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -67,9 +72,9 @@ export default function Product({fav, product}) {
             })
             .then(res => {
                 if (res.data === 'added') {
-                    setIconColor({color: '#E94A88'})
+                    setIconColor({color: '#E94A88'});
                 } else {
-                    setIconColor({})
+                    setIconColor({});
                 }
             });
         } catch (error) {
@@ -79,7 +84,7 @@ export default function Product({fav, product}) {
 
     function deletePost () {
         try {
-            axios.delete(`/api/delete/${product._id}`,{
+            axios.delete(`http://localhost:4000/api/delete/${product._id}`,{
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -95,13 +100,10 @@ export default function Product({fav, product}) {
         }
     }
 
-    function checkFav() {
-        if (fav) {
-            setIconColor({color: '#E94A88'})
-        } else {
-            const temp = favorites.filter(fav => fav === product._id);
-            if (temp.length !== 0) {
-                setIconColor({color: '#E94A88'})
+    function checkFav() { 
+        if (favorites !== undefined) {
+            if (favorites.includes(product._id)) {
+                setIconColor({color: '#E94A88'});
             }
         }
     }
@@ -116,18 +118,18 @@ export default function Product({fav, product}) {
 
     const handleFavClick = () => {
         if (ctx.connected) {
-            addToFav()
+            addToFav();
         } else {
             alert('login first')
         }
     }
     
     return (
-        <Card className={classes.Card} sx={{ boxShadow: "none", textDecoration: "none"}}>    
+        <Card className={classes.Card} sx={{ boxShadow: "none", textDecoration: "none"}}>  
                     <CardMedia
                         component="img"
                         height="250"
-                        image= {`/api/images/${product.img[0]}`}
+                        image= {`http://localhost:4000/api/images/${product.img[0]}`}
                         alt={product.title}
                     />
                 <CardContent sx={{height: "145px"}} >
@@ -143,7 +145,7 @@ export default function Product({fav, product}) {
                     <IconButton onClick={handleFavClick} className={classes.icon} aria-label="add to favorites">
                         <Favorite sx={iconColor} />
                     </IconButton>
-                    <IconButton onClick={handleShareClick} className={classes.icon2} aria-label="add to favorites">
+                    <IconButton onClick={handleShareClick} className={classes.icon2} aria-label="share">
                         <ShareOutlined />
                     </IconButton>
                     {

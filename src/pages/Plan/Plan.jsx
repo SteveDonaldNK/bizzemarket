@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Dialog, DialogContent, DialogContentText, DialogTitle, Grid, Stack, useMediaQuery } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Stack, TextField, useMediaQuery } from '@mui/material';
 import { Box, useTheme } from '@mui/system';
 import axios from 'axios';
 import Orange from '../../assets/OMlogo.jpg'
@@ -14,6 +14,7 @@ import Master from '../../assets/master.png'
 import American from '../../assets/american.png'
 import Visa from '../../assets/visa.jpg'
 import Credit from '../../assets/creditcard.png'
+import { useState } from 'react';
 
 const methods =[Orange, MTN, Master, American, Visa]
 
@@ -49,7 +50,7 @@ const handleCheckout = (price) => {
     }
 
     try {
-        axios.post("/api/checkout",data, {
+        axios.post("http://localhost:4000/api/checkout",data, {
             Headers: {
                 "Content-Type":"application/json"
             },
@@ -61,7 +62,8 @@ const handleCheckout = (price) => {
 }
 
 export default function Plan() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [formOpen, setFormOpen] = useState(false);
     const [id, setId] = React.useState('');
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down(335))
@@ -71,9 +73,18 @@ export default function Plan() {
         setOpen(true);
     };
 
+    const handleMethod = () => {
+
+    }
+
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleFormClose = () => {
+        setFormOpen(false);
+    };
+    
     let btnLabel = '';
     isMatch ? btnLabel = 'Payer' : btnLabel = 'Passer au paiement'
 
@@ -135,6 +146,28 @@ export default function Plan() {
             </Stack>
           </DialogContentText>
         </DialogContent>
+      </Dialog>
+      <Dialog open={formOpen} onClose={handleFormClose}>
+        <DialogTitle>Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We
+            will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Subscribe</Button>
+        </DialogActions>
       </Dialog>
     </div>
   );

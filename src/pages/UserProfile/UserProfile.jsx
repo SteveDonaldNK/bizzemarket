@@ -49,24 +49,28 @@ function a11yProps(index) {
 export default function Profile() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const [sold, setSold] = useState([]);
+  const [btn, setBtn] = useState('all');
   const [value, setValue] = useState(0);
   const [userData, setUserData] = useState();
-  const [favorites, setFavorites] = useState([]);
-  const [sold, setSold] = useState([]);
-  const [userProducts, setUserProducts] = useState([]);
-  const [btn, setBtn] = useState('all');
   const [loading, setLoading] = useState(true);
+  const [userProducts, setUserProducts] = useState([]);
+  const [productsPerSet, setProductsPerSet] = useState(4);
+  const [hasReached, setHasReached] = useState(false);
+
+  const lastProductIndex = productsPerSet;
+  const firstProductIndex = 0;
+  const currentProducts = userProducts.slice(firstProductIndex, lastProductIndex);
+  
 
   function fetchUser() {
     try {
-       axios.get("/api/userdata",{withCredentials: true}) 
+       axios.get("http://localhost:4000/api/userdata",{withCredentials: true}) 
        .then((res) => {
+        const soldItem = res.data.posts.filter(item => item.sold === true);
         setUserData(res.data);
         setUserProducts(res.data.posts);
-        const fav = res.data.fav.map(({_id}) => _id)
-        const soldItem = res.data.posts.filter(item => item.sold === true);
         setSold(soldItem);
-        setFavorites(fav); 
         setLoading(false);
       })
     } catch (error) {
@@ -79,22 +83,21 @@ export default function Profile() {
   };
 
   const handleSoldOut = () => {
-    try {
-      axios.get("/api/soldOut", {withCredentials: true})
-      .then(res => {
-        setUserProducts(res.data)
+      fetch("http://localhost:4000/api/soldOut", {method: 'GET' ,credentials: 'include'})
+      .then(async res => {
+        const data = await res.json();
+        setUserProducts(data);
         setLoading(false);
-      });
-    } catch (error) {
-      console.log(error)
-    }
+      }).catch(err => {
+        console.log(err)
+      })
   }
 
   const handlePending = () => {
     try {
-      axios.get("/api/pending", {withCredentials: true})
+      axios.get("http://localhost:4000/api/pending", {withCredentials: true})
       .then(res => {
-        setUserProducts(res.data)
+        setUserProducts(res.data);
         setLoading(false);
       });
     } catch (error) {
@@ -104,9 +107,9 @@ export default function Profile() {
 
   const handleRefused = () => {
     try {
-      axios.get("/api/denied", {withCredentials: true})
+      axios.get("http://localhost:4000/api/denied", {withCredentials: true})
       .then(res => {
-        setUserProducts(res.data)
+        setUserProducts(res.data);
         setLoading(false);
       });
     } catch (error) {
@@ -115,24 +118,40 @@ export default function Profile() {
   }
 
   const handleButtonChange = (event, newBtn) => {
+    setProductsPerSet(4);
+    checkLimit();
     if (newBtn !== null) {
-      setBtn(newBtn);
       if (newBtn === 'all') {
+        setBtn('all');
         fetchUser();
       } else if (newBtn === 'sold') {
+        setBtn('sold');
         handleSoldOut();
       } else if (newBtn === 'pending') {
+        setBtn('pending');
         handlePending();
       } else {
+        setBtn('denied');
         handleRefused();
       }
     }
   }
 
+  const checkLimit = () => {
+    if (userProducts.length >= productsPerSet) {
+      setHasReached(true);
+    } else {
+      setHasReached(false);
+    }
+  }
+
   useEffect(() => {
     fetchUser()
-  }, [])
+  }, []);
 
+  useEffect(() => {
+    checkLimit();
+  }, [productsPerSet]);
 
   if (userData === undefined) return <Box sx={{ height: "60vh", display: 'flex', justifyContent: "center", alignItems: "center" }}>
   <CircularProgress />
@@ -197,21 +216,23 @@ export default function Profile() {
             <Box sx={{ height: "30vh", width: "100%",display: 'flex', justifyContent: "center", alignItems: "center" }}>
             <CircularProgress size="1.7rem" />
           </Box>
-            :(userProducts.length === 0) ? <><Box textAlign="center">
+            :(currentProducts.length === 0) ? <><Box textAlign="center">
                 <img src={EmptyBox} className={classes.emptyBox} alt="" />
               </Box>
               <Typography variant='h5' textAlign='center'>Aucune annonce en vente</Typography>
               <Box textAlign="center">
-              <Button sx={{float: "center", mt: 2}} variant='contained'>Publier une annonce</Button>
-            </Box></> : 
+              <Button onClick={() => window.location.href = "/annonces"} sx={{float: "center", mt: 2}} variant='contained'>Publier une annonce</Button>
+            </Box></> : <>
               <Grid item container spacing={2} xs={12} sm={12} md={12} lg={12} xl={12}>
-                {userProducts.map((product) => (
+                {currentProducts.map((product) => (
                       <Grid key={product._id} item xs={12} sm={6} md={4} lg={3}>
                         {product.status === 'accepted'} {product.status === 'accepted'} {product.status === 'accepted'}
                             <Product product = {product}/>
                       </Grid>
                   ))}
               </Grid>
+              <Button disabled={hasReached} onClick={() => setProductsPerSet(8)} sx={{margin: "25px auto 0", display: "block"}} variant="contained">voir plus</Button>
+              </>
               }
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -221,12 +242,12 @@ export default function Profile() {
             </Box>
             <Typography variant='h5' textAlign='center'>Aucune annonce en Favoris</Typography>
             <Box textAlign="center">
-              <Button sx={{float: "center", mt: 2}} variant='contained'>Publier une annonce</Button>
+              <Button onClick={() => window.location.href = "/annonces"} sx={{float: "center", mt: 2}} variant='contained'>Publier une annonce</Button>
             </Box></> :
               <Grid item container spacing={2} xs={12} sm={12} md={12} lg={12} xl={12}>
               {userData.fav.map((product) => (
                   <Grid key={product._id} item xs={12} sm={6} md={4} lg={3}>
-                      <Product fav={true} product = {product}/>
+                      <Product product = {product}/>
                   </Grid>
               ))}
             </Grid>

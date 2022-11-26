@@ -10,7 +10,7 @@ export default function UserAccount() {
 
     useEffect (() => {
       try {
-        axios.get("/api/userdata",{withCredentials: true}).then(res => {
+        axios.get("http://localhost:4000/api/userdata",{withCredentials: true}).then(res => {
           setUserData(res.data);
           setLoading(false);
         })

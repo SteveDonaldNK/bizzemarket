@@ -22,6 +22,8 @@ import Login from './pages/Login/Login';
 import Success from './pages/Success/Success';
 import Cancel from './pages/Cansel/Cancel';
 import EditPost from './pages/EditPost/EditPost';
+import ProtectedRoutes from './ProtectedRoutes';
+import Contact from './pages/Contact/Contact';
 
 export default function App() {
   const location = useLocation().pathname;
@@ -38,12 +40,14 @@ export default function App() {
     <>
       {location === '/admin' ? null : <Navbar theme={theme}/>}
       <Routes>
-        {ctx.connected ? <Route path = "/account" element={<UserAccount />}/> : <Route path = "/account" element={<Login />}/> }
-        {ctx.connected ? <Route path = "/post" element={<Post />}/> : <Route path = "/post" element={<Login />}/>}
-        {ctx.connected ? <Route path = "/dashboard" element={<UserProfile />}/> : <Route path = "/dashboard" element={<Login />}/>}
-        {ctx.connected && <Route path = "/success" element={<Success />}/>}
-        {ctx.connected && <Route path = "/cancel" element={<Cancel />}/>}
-    
+        <Route element={<ProtectedRoutes />} >
+          <Route path = "/account" element={<UserAccount />}/> : <Route path = "/account" element={<Login />}/> 
+          <Route path = "/post" element={<Post />}/> : <Route path = "/post" element={<Login />}/>
+          <Route path = "/dashboard" element={<UserProfile />}/> : <Route path = "/dashboard" element={<Login />}/>
+          <Route path = "/success" element={<Success />}/>
+          <Route path = "/cancel" element={<Cancel />}/>
+        </Route>
+
         {(ctx.connected && ctx.isAdmin) && <Route path = "/admin" element={<Dash />}/>}
         <Route path = "/" element={<Home />}/>
         <Route path = "/*" element={<Notfound />}/>
@@ -57,6 +61,7 @@ export default function App() {
         <Route path = "/annonces/:category" element={<Category />}/>
         <Route path = "/annonces/:category/:subCategory" element={<SubProduct />}/>
         <Route path = "/annonces/:category/product/:productID" element={<Item />}/>
+        <Route path = "/contact" element={<Contact />} />
       </Routes>
       <Footer theme={theme}/>
     </>

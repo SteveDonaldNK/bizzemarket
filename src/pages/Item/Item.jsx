@@ -49,7 +49,7 @@ export default function Item() {
 
   const fetchProduct = async () => {
     try {
-        const {data} = await axios.get(`/api/products/${productCategory}/${productID}`);
+        const {data} = await axios.get(`http://localhost:4000/api/products/${productCategory}/${productID}`);
         setCurrentProduct(data);
         setLoading(false);
     } catch (error) {
@@ -59,7 +59,7 @@ export default function Item() {
 
 const fetchSimilarProducts = async () => {
   try {
-    let {data} = await axios.get(`/api/products/${productCategory}`);
+    let {data} = await axios.get(`http://localhost:4000/api/products/${productCategory}`);
     data = data.slice(0, 6);
     setSimilarProducts(data);
   } catch (error) {
@@ -69,7 +69,7 @@ const fetchSimilarProducts = async () => {
 
 const fetchSeller= async () => {
   try {
-    axios.get(`/api/seller/${productID}`)
+    axios.get(`http://localhost:4000/api/seller/${productID}`)
     .then((res) => {
       setSellerData(res.data);
     })
