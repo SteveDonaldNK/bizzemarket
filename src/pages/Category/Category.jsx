@@ -40,7 +40,7 @@ export default function App() {
 
   const fetchProducts = () => {
     try {
-        axios.get(`http://localhost:4000/api/products/${category}`)
+        axios.get(`http://54.197.36.149:4000/api/products/${category}`)
         .then((res) => setProducts(res.data))
     } catch (error) {
         console.log(error);

@@ -23,7 +23,7 @@ export default function Contact() {
         }
 
         try {
-            axios.post("http://localhost:4000/api/contact", Data)
+            axios.post("http://54.197.36.149:4000/api/contact", Data)
             .then(res => console.log(res.data));
         } catch (error) {
             console.log(error);

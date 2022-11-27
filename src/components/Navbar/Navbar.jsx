@@ -58,7 +58,7 @@ export default function Navbar({theme}) {
 
     function fetchUser() {
       try {
-         axios.get("http://localhost:4000/api/userdata",{withCredentials: true}) 
+         axios.get("http://54.197.36.149:4000/api/userdata",{withCredentials: true}) 
          .then((res) => {
           setUser(res.data);   
          })
@@ -123,7 +123,7 @@ export default function Navbar({theme}) {
 
     const handleLogout = () => {
       localStorage.clear();
-      axios.get("http://localhost:4000/api/logout", {withCredentials: true})
+      axios.get("http://54.197.36.149:4000/api/logout", {withCredentials: true})
       .then(res => {
         if (res.status === 200) {
           window.location.href = location;

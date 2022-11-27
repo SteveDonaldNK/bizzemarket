@@ -24,6 +24,8 @@ import Cancel from './pages/Cansel/Cancel';
 import EditPost from './pages/EditPost/EditPost';
 import ProtectedRoutes from './ProtectedRoutes';
 import Contact from './pages/Contact/Contact';
+import GoogleAds from './components/GoogleAds/GoogleAds';
+
 
 export default function App() {
   const location = useLocation().pathname;
@@ -39,6 +41,7 @@ export default function App() {
   return (
     <>
       {location === '/admin' ? null : <Navbar theme={theme}/>}
+      <GoogleAds />
       <Routes>
         <Route element={<ProtectedRoutes />} >
           <Route path = "/account" element={<UserAccount />}/> : <Route path = "/account" element={<Login />}/> 
@@ -62,6 +65,7 @@ export default function App() {
         <Route path = "/annonces/:category/:subCategory" element={<SubProduct />}/>
         <Route path = "/annonces/:category/product/:productID" element={<Item />}/>
         <Route path = "/contact" element={<Contact />} />
+        <Route path = "/Contact" element={<Contact />} />
       </Routes>
       <Footer theme={theme}/>
     </>

@@ -27,7 +27,7 @@ export default function Product({product}) {
 
     function getFav() {
         try {
-            axios.get('http://localhost:4000/api/favorite', {withCredentials: true})
+            axios.get('http://54.197.36.149:4000/api/favorite', {withCredentials: true})
             .then(res => setFavorites(res.data))
         } catch (error) {
             console.log(error)
@@ -64,7 +64,7 @@ export default function Product({product}) {
 
     function addToFav () {
         try {
-            axios.patch("http://localhost:4000/api/user/fav", {favorite: product._id}, {
+            axios.patch("http://54.197.36.149:4000/api/user/fav", {favorite: product._id}, {
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -84,7 +84,7 @@ export default function Product({product}) {
 
     function deletePost () {
         try {
-            axios.delete(`http://localhost:4000/api/delete/${product._id}`,{
+            axios.delete(`http://54.197.36.149:4000/api/delete/${product._id}`,{
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -113,7 +113,7 @@ export default function Product({product}) {
     }
 
     const handleShareClick = () => {
-        console.log(`http://localhost:3000/annonces/${product.category}/product/${product._id}`)
+        console.log(`http://54.197.36.149:3000/annonces/${product.category}/product/${product._id}`)
     }
 
     const handleFavClick = () => {
@@ -129,7 +129,7 @@ export default function Product({product}) {
                     <CardMedia
                         component="img"
                         height="250"
-                        image= {`http://localhost:4000/api/images/${product.img[0]}`}
+                        image= {`http://54.197.36.149:4000/api/images/${product.img[0]}`}
                         alt={product.title}
                     />
                 <CardContent sx={{height: "145px"}} >

@@ -10,7 +10,7 @@ const [posts, setPosts] = useState([])
 
 function fetchPendingPosts () {
     try {
-       axios.get("http://localhost:4000/api/admin/pending", {withCredentials: true})
+       axios.get("http://54.197.36.149:4000/api/admin/pending", {withCredentials: true})
        .then(res => setPosts(res.data))
     } catch (error) {
         console.log(error)
