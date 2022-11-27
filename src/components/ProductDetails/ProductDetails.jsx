@@ -60,7 +60,7 @@ export default function ProductDetails({ similarProducts, currentProduct, seller
   const handleChoice = () => {
     if (choice !== '') {
         try {
-            axios.patch("http://54.197.36.149:4000/api/pending", {choice: choice, productId: currentProduct._id}, {
+            axios.patch("http://54.197.36.149/api/pending", {choice: choice, productId: currentProduct._id}, {
                 headers: {
                     "Content-Type":"application/json"
                 },
@@ -83,7 +83,7 @@ export default function ProductDetails({ similarProducts, currentProduct, seller
 
   const increment = () => {
     try {
-        axios.get(`http://54.197.36.149:4000/api/incrementView/${currentProduct._id}`);
+        axios.get(`http://54.197.36.149/api/incrementView/${currentProduct._id}`);
     } catch (err) {
         console.log("An error occured");
     }
@@ -105,12 +105,12 @@ export default function ProductDetails({ similarProducts, currentProduct, seller
         <Grid justifyContent="space-between" container>
             <Grid sx={{height: "min-content"}} item xs={12} sm={12} md={7} lg={7}>
                 <Box className={classes.box}>
-                    <img className={classes.mainImg} src={`http://54.197.36.149:4000/api/images/${currentImage}`} alt={currentProduct.title} />
+                    <img className={classes.mainImg} src={`http://54.197.36.149/api/images/${currentImage}`} alt={currentProduct.title} />
                 </Box>
                 <Grid spacing={1} sx={{mt: 0, mb: 2}} container>
                     {currentProduct.img.map((link) => (
                         <Grid onClick={() => handleImageClick(link)} sx={imgSize} item xs={4} sm={4} md={4} lg={4}>
-                            <img className={classes.img} src={`http://54.197.36.149:4000/api/images/${link}`} alt={link.title} />
+                            <img className={classes.img} src={`http://54.197.36.149/api/images/${link}`} alt={link.title} />
                         </Grid>
                     ))}
                 </Grid>

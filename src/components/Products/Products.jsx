@@ -24,7 +24,7 @@ export default function Products({subProducts, title, theme}) {
     
     const fetchProducts = (filter) => {
       try {
-        axios.post("http://54.197.36.149:4000/api/sort", {filterValue: filter}, {
+        axios.post("http://54.197.36.149/api/sort", {filterValue: filter}, {
             headers: {
                 'Content-Type':'application/json'
             }

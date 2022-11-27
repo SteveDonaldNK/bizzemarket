@@ -9,7 +9,7 @@ export default function Context(props) {
 
   useEffect(() => {
     try {
-      axios.get("http://54.197.36.149:4000/api/loggedIn", {withCredentials: true})
+      axios.get("http://54.197.36.149/api/loggedIn", {withCredentials: true})
       .then(res => {
         setUser(res.data.connected)
         setAdmin(res.data.isAdmin)

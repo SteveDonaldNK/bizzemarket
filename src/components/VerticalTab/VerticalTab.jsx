@@ -11,7 +11,7 @@ import './styles.css'
 
 const logOut = () => {
   localStorage.clear();
-  axios.get("http://54.197.36.149:4000/api/logout", {withCredentials: true})
+  axios.get("http://54.197.36.149/api/logout", {withCredentials: true})
   .then(res => {
     if (res.status === 200) {
       window.location.href = "/";
@@ -102,7 +102,7 @@ export default function VerticalTab({userData}) {
     formData.append("avatar", picture);
     console.log([...formData]);
     try {
-      axios.put("http://54.197.36.149:4000/api/updateuser", formData, {
+      axios.put("http://54.197.36.149/api/updateuser", formData, {
       headers: {
         'Content-Type':'multipart/form-data'
       }, 
@@ -149,7 +149,7 @@ export default function VerticalTab({userData}) {
     } else {
       const {confirm, ...credentials} = obj;
       try {
-        axios.patch("http://54.197.36.149:4000/api/resetpassword", credentials, {
+        axios.patch("http://54.197.36.149/api/resetpassword", credentials, {
           headers: {
             "Content-Type":"application/json"
           },
@@ -204,7 +204,7 @@ export default function VerticalTab({userData}) {
                           <IconButton onClick={handleClick} sx={{background: "#FFF", border: "1px solid #AAA", '&:hover': {background: "#FFF"}}}><Edit sx={{fontSize: "1rem !important"}} /></IconButton>
                       }
                       >
-                      <Avatar src={ profilePictue !== undefined && `http://54.197.36.149:4000/api/${profilePictue}`} sx={{height: 80, width: 80}} />
+                      <Avatar src={ profilePictue !== undefined && `http://54.197.36.149/api/${profilePictue}`} sx={{height: 80, width: 80}} />
                       </Badge>
                       <input
                           style={{display: 'none'}}

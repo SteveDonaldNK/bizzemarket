@@ -43,7 +43,7 @@ export default function Post() {
                 setSelectedImage1('');
                 setSelectedImage2('');
                 setSelectedImage3('');
-                axios.post("http://54.197.36.149:4000/api/products", formData , {
+                axios.post("http://54.197.36.149/api/products", formData , {
                     headers: {
                       'Content-Type': 'multipart/form-data'
                     },

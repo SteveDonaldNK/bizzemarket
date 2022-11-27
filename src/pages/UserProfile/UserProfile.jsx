@@ -65,7 +65,7 @@ export default function Profile() {
 
   function fetchUser() {
     try {
-       axios.get("http://54.197.36.149:4000/api/userdata",{withCredentials: true}) 
+       axios.get("http://54.197.36.149/api/userdata",{withCredentials: true}) 
        .then((res) => {
         const soldItem = res.data.posts.filter(item => item.sold === true);
         setUserData(res.data);
@@ -83,7 +83,7 @@ export default function Profile() {
   };
 
   const handleSoldOut = () => {
-      fetch("http://54.197.36.149:4000/api/soldOut", {method: 'GET' ,credentials: 'include'})
+      fetch("http://54.197.36.149/api/soldOut", {method: 'GET' ,credentials: 'include'})
       .then(async res => {
         const data = await res.json();
         setUserProducts(data);
@@ -95,7 +95,7 @@ export default function Profile() {
 
   const handlePending = () => {
     try {
-      axios.get("http://54.197.36.149:4000/api/pending", {withCredentials: true})
+      axios.get("http://54.197.36.149/api/pending", {withCredentials: true})
       .then(res => {
         setUserProducts(res.data);
         setLoading(false);
@@ -107,7 +107,7 @@ export default function Profile() {
 
   const handleRefused = () => {
     try {
-      axios.get("http://54.197.36.149:4000/api/denied", {withCredentials: true})
+      axios.get("http://54.197.36.149/api/denied", {withCredentials: true})
       .then(res => {
         setUserProducts(res.data);
         setLoading(false);

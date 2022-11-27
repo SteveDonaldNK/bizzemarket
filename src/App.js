@@ -41,7 +41,6 @@ export default function App() {
   return (
     <>
       {location === '/admin' ? null : <Navbar theme={theme}/>}
-      <GoogleAds />
       <Routes>
         <Route element={<ProtectedRoutes />} >
           <Route path = "/account" element={<UserAccount />}/> : <Route path = "/account" element={<Login />}/> 

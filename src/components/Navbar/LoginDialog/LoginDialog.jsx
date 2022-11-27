@@ -62,7 +62,7 @@ export default function LoginDialog(props) {
     const payload = [...formData];
     const data = {email: payload[0][1], password: payload[1][1]}
     try {
-      axios.post("http://54.197.36.149:4000/api/login", data, {
+      axios.post("http://54.197.36.149/api/login", data, {
         headers:{
           'Content-Type':'application/json'
       },
@@ -89,7 +89,7 @@ export default function LoginDialog(props) {
     const formData = new FormData(form);
     const payload = [...formData];
     try {
-      axios.post("http://54.197.36.149:4000/api/register", {userName: payload[0][1], email: payload[1][1], password: payload[2][1]}, {
+      axios.post("http://54.197.36.149/api/register", {userName: payload[0][1], email: payload[1][1], password: payload[2][1]}, {
         headers:{
           'Content-Type':'application/json'
       },
@@ -115,7 +115,7 @@ export default function LoginDialog(props) {
       <DialogTitle textAlign="center">Se connecter a un compte</DialogTitle>
       <List sx={{ padding: "20px"}}>
         {LoginMethod.map((method) => (
-          <a style={{textDecoration: "none", color: "#000"}} href={`http://54.197.36.149:4000/api/auth/${method.account}`}>
+          <a style={{textDecoration: "none", color: "#000"}} href={`http://54.197.36.149/api/auth/${method.account}`}>
             <ListItem button key={method.account}>
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: "#FFF"}}>

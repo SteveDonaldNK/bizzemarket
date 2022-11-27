@@ -63,7 +63,7 @@ export default function Profile() {
 
     function fetchSeller() {
       try {
-        axios.get(`http://54.197.36.149:4000/api/getseller/${sellerId}`)
+        axios.get(`http://54.197.36.149/api/getseller/${sellerId}`)
         .then((res) => {
           setSellerData(res.data)
           const soldItem = res.data.posts.filter(item => item.sold === true);
@@ -87,7 +87,7 @@ export default function Profile() {
     return (
       <div className={classes.container}>
           <Box className={classes.box} >
-              <Avatar src={`http://54.197.36.149:4000/api/${sellerData.image}`} className={classes.avatar} sx={{height: 200, width: 200}} />
+              <Avatar src={`http://54.197.36.149/api/${sellerData.image}`} className={classes.avatar} sx={{height: 200, width: 200}} />
           </Box>
           <Box sx={{padding: "120px 0 30px"}} textAlign="center">
               <Typography color="GrayText" variant='subtitle1' >{sellerData.town}, Cameroun</Typography>

@@ -16,7 +16,7 @@ export default function Search() {
 
   const fetchProducts = async () => {
     try {
-      axios.get(`http://54.197.36.149:4000/api/search${search}`)
+      axios.get(`http://54.197.36.149/api/search${search}`)
       .then((res) => {
         setProducts(res.data)
       })
